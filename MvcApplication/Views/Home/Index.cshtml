@@ -57,7 +57,7 @@
 </table>
 
 <div class="pull-right">
-    <a id="new-timesheet" class="btn btn-success" data-toggle="modal" href="#timesheet-modal">Add timesheet</a>
+    <a id="new-timesheet" class="btn btn-success" data-toggle="modal" href="#timesheet-modal" data-bind="click: resetForm.bind($data, 'Timesheet')">Add timesheet</a>
 </div>
 
 <div class="modal hide fade" id="timesheet-modal">
@@ -178,6 +178,12 @@ var viewModel = {
         });
     },
 
+	resetForm: function (formId) {
+            var form = $('#' + formId);
+            form.validate().resetForm();
+            form.get(0).reset();
+        },
+	
     deleteTimesheets: function (modalId) {
         var ids = new Array();
         $.each(this.timesheets(), function (index, timesheet) {
